@@ -11,13 +11,13 @@ class Repeater():
          repeat_after_days=1, at_time="09:30", msg="This is your alarm!!", to="0444444444"):
 
 
-        today = int(datetime.today().timestamp())
+        right_now = int(datetime.today().timestamp())
         date_from = int(date_from.timestamp())
 
         if date_from < today:
             raise ValueError("date_from cannot be before today")
         else:
-            time_diff = date_from - today
+            time_diff = date_from - right_now
 
             t = Timer(time_diff, self.set_alarm, [repeat_after_days, at_time, msg, to])
             t.start()
@@ -44,8 +44,8 @@ class Repeater():
 if __name__ == "__main__":
     
     repeat = Repeater()
-    rent_starting_date = datetime.today()
-    repeat.add_repeat_sequence(date_from=rent_starting_date, repeat_after_days=14, msg="Time to dance!", \
+    starting_date = datetime.today()
+    repeat.add_repeat_sequence(date_from=starting_date, repeat_after_days=14, msg="Time to dance!", \
         to="+61444444444")
 
     while True:
